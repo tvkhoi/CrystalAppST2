@@ -490,6 +490,7 @@ namespace WindowsFormsApp1
             {
                 filter += string.Format(" AND sHoTen LIKE '%{0}%'", tb_tensv.Text);
             }
+            //dien day du cac truong du lieu khac
             ShowData(filter);
         }
 
@@ -562,16 +563,28 @@ namespace WindowsFormsApp1
 
         private void btn_inDSSV_Click(object sender, EventArgs e)
         {
+            string reportFilter = "NOT(ISNULL({Select_Tonghop.sMaSV}))";
+            if (!string.IsNullOrEmpty(tb_masv.Text))
+            {
+                reportFilter += string.Format(" AND {0} LIKE '*{1}*'", "{Select_Tonghop.sMaSV}", tb_masv.Text);
+            }
+            if (!string.IsNullOrEmpty(tb_tensv.Text))
+            {
+                reportFilter += string.Format(" AND {0} LIKE '*{1}*'", "{Select_Tonghop.sHoten}", tb_tensv.Text);
+            }
+            //liệt kê các trường dữ liệu khác
+
+
             Form2 form2 = new Form2();
             form2.Show();
-            form2.ShowReport("DDSV.rpt", "Select_TongHop");
+            form2.ShowReport("DDSV.rpt", "Select_TongHop", reportFilter);
         }
 
         private void btn_group_Click(object sender, EventArgs e)
         {
             Form2 form2 = new Form2();
             form2.Show();
-            form2.ShowReport("DDSVPhanNhom.rpt", "Select_TongHop");
+            form2.ShowReport("DDSVPhanNhom.rpt", "Select_TongHop", null);
         }
 
         private void btn_inbangdiem_Click(object sender, EventArgs e)

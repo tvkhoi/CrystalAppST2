@@ -21,7 +21,7 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
-        public void ShowReport(string tenBaoCao, string tenProc)
+        public void ShowReport(string tenBaoCao, string tenProc, string reportFilter)
         {
             try
             {
@@ -47,6 +47,14 @@ namespace WindowsFormsApp1
                                 report.Database.Tables[tenProc].SetDataSource(dt);
 
                                 report.SetParameterValue("sNguoiLapBieu", "NDPT");
+
+                                //đặt điều kiện để lọc các bản ghi hiển thị lên báo cáo
+                                if(reportFilter != null)
+                                {
+                                    report.RecordSelectionFormula = reportFilter;
+                                }
+                                
+
                                 crystalReportViewer.ReportSource = report;
                                 crystalReportViewer.Refresh();
                             }
