@@ -54,7 +54,7 @@ namespace WindowsFormsApp1
                                     report.RecordSelectionFormula = reportFilter;
                                 }
                                 
-
+                                
                                 crystalReportViewer.ReportSource = report;
                                 crystalReportViewer.Refresh();
                             }
